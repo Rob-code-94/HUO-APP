@@ -3,28 +3,43 @@
 The creative network connecting Ohio’s creative community — UI foundation and app codebase.
 
 **Repository:** https://github.com/Rob-code-94/HUO-APP  
-**Google AI Studio app (general access):** https://ai.studio/apps/a17ea1b2-e391-4d40-9790-36ecc7066132
+**Google AI Studio app:** https://ai.studio/apps/a17ea1b2-e391-4d40-9790-36ecc7066132  
+**Client demo host:** Vercel (after first deploy — see [`docs/WORKFLOW.md`](docs/WORKFLOW.md))
+
+## Workflow (locked)
+
+| Stage | Tool |
+| --- | --- |
+| Edit UI / explore layouts | Google AI Studio |
+| Shareable client demo | **Vercel** (free Hobby) |
+| Fixes, backend, final pack | **Cursor** |
+
+Full detail: [`docs/WORKFLOW.md`](docs/WORKFLOW.md)
+
+## Run locally
+
+```bash
+npm install
+npm run dev
+```
+
+```bash
+npm run build && npm run preview
+```
 
 ## What’s in this repo
 
 | Path | Purpose |
 | --- | --- |
-| `src/` | Google Studio–generated UI kit, screens, and wireframe system (**do not overwrite casually**) |
-| `docs/PRODUCT-BIBLE.md` | Authoritative product bible (brand, MVP, pricing, GTM) |
+| `src/` | Interactive UI kit, screens, wireframes (Studio-origin + Cursor fixes) |
+| `docs/PRODUCT-BIBLE.md` | Authoritative product bible |
 | `docs/FOUNDATION.md` | Condensed working summary |
+| `docs/WORKFLOW.md` | Studio → Vercel → Cursor process |
 | `docs/GOOGLE-STUDIO-UI-PROMPT.md` | Prompt used for UI generation |
 | `Design Reference/` | Milanote screenshots, wireframes, brand references |
-| `.cursor/rules/` | Always-on project context for Cursor agents |
 
 ## Docs
 
-Start here before product or brand decisions:
-
 1. [`docs/PRODUCT-BIBLE.md`](docs/PRODUCT-BIBLE.md)
 2. [`docs/FOUNDATION.md`](docs/FOUNDATION.md)
-
-## Status
-
-UI wireframe / design-system code lives in `src/`. Product foundation and design references
-were consolidated from the earlier `Rob-code-94/HUO` docs repo without modifying existing
-application source files. Backend work continues in this repository going forward.
+3. [`docs/WORKFLOW.md`](docs/WORKFLOW.md)

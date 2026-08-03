@@ -14,8 +14,15 @@ Fiverr marketplace + LinkedIn networking, built for real-world Columbus/Ohio com
 1. `docs/PRODUCT-BIBLE.md` — authoritative product bible (brand, MVP, pricing, GTM)
 2. `docs/FOUNDATION.md` — condensed working summary
 3. `docs/GOOGLE-STUDIO-UI-PROMPT.md` — UI-only Studio prompt
+4. `docs/WORKFLOW.md` — Studio → Vercel → Cursor
 
 Prefer the Product Bible when older Google Doc / Milanote notes disagree.
+
+## Workflow (locked)
+
+- **Edit UI** in Google AI Studio
+- **Client demo** on Vercel (free Hobby) — not Studio Publish / Cloud billing
+- **Fixes + backend + final pack** in Cursor
 
 ## Quick context
 
@@ -37,7 +44,7 @@ Primary repo going forward: https://github.com/Rob-code-94/HUO-APP
 Legacy foundation-only repo: https://github.com/Rob-code-94/HUO  
 Google AI Studio app (general access): https://ai.studio/apps/a17ea1b2-e391-4d40-9790-36ecc7066132
 
-Protect existing UI under `src/` — consolidate docs/design assets without overwriting app code.
+Protect existing UI under `src/` — merge Studio exports carefully; do final fixes in Cursor.
 
 ## Reference links
 

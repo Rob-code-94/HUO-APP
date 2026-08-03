@@ -30,7 +30,7 @@ import { BookRequestModal } from './components/modals/BookRequestModal';
 
 // Types & Data
 import {
-  ViewMode,
+  AppViewMode,
   AccountType,
   MainTab,
   PostItem,
@@ -53,8 +53,7 @@ import {
 
 export function App() {
   // Global Mode & Persona States
-  const [viewMode, setViewMode] = useState<ViewMode>('interactive');
-  const [wireframeSubTab, setWireframeSubTab] = useState<'blueprint' | 'tokens' | 'sitemap' | 'devnotes'>('blueprint');
+  const [viewMode, setViewMode] = useState<AppViewMode>('app');
   const [accountType, setAccountType] = useState<AccountType>('creative');
   const [activeTab, setActiveTab] = useState<MainTab>('home');
 
@@ -163,20 +162,19 @@ export function App() {
         setViewMode={setViewMode}
         accountType={accountType}
         setAccountType={setAccountType}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-        unreadNotificationsCount={unreadCount}
+        unreadNotifications={unreadCount}
         onOpenNotifications={() => setIsNotificationsOpen(true)}
         onOpenSettings={() => setIsSettingsOpen(true)}
-        onOpenSplash={() => setIsSplashOpen(true)}
+        onOpenOnboarding={() => setIsSplashOpen(true)}
+        onOpenProModal={() => setIsProModalOpen(true)}
+        appFreeApplicationsLeft={freeApplicationsLeft}
       />
 
       {/* Main Page Canvas */}
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6">
-        {/* VIEW MODE: INTERACTIVE APPLICATION WIREFRAME */}
-        {viewMode === 'interactive' && (
+        {/* VIEW MODE: INTERACTIVE APPLICATION */}
+        {viewMode === 'app' && (
           <div className="flex flex-col md:flex-row gap-6 items-start">
-            {/* Desktop Navigation Sidebar */}
             <DesktopNav
               activeTab={activeTab}
               setActiveTab={setActiveTab}
@@ -186,7 +184,6 @@ export function App() {
               unreadMessagesCount={1}
             />
 
-            {/* Primary View Router */}
             <main className="flex-1 w-full min-w-0">
               {activeTab === 'home' && (
                 <HomeScreen
@@ -248,55 +245,14 @@ export function App() {
           </div>
         )}
 
-        {/* VIEW MODE: WIREFRAME SYSTEM ARCHITECTURE */}
-        {viewMode === 'wireframes' && (
-          <div className="space-y-5">
-            {/* Sub-tab switcher */}
-            <div className="bg-white border-2 border-black rounded-2xl p-3 flex flex-wrap gap-2 font-mono-code text-xs">
-              <button
-                onClick={() => setWireframeSubTab('blueprint')}
-                className={`px-4 py-2 rounded-xl font-bold border border-black ${
-                  wireframeSubTab === 'blueprint' ? 'bg-black text-white' : 'bg-[#F7F7F5] text-black hover:bg-white'
-                }`}
-              >
-                Blueprint Board (Stage 00 - 05)
-              </button>
-              <button
-                onClick={() => setWireframeSubTab('tokens')}
-                className={`px-4 py-2 rounded-xl font-bold border border-black ${
-                  wireframeSubTab === 'tokens' ? 'bg-black text-white' : 'bg-[#F7F7F5] text-black hover:bg-white'
-                }`}
-              >
-                Design System Tokens
-              </button>
-              <button
-                onClick={() => setWireframeSubTab('sitemap')}
-                className={`px-4 py-2 rounded-xl font-bold border border-black ${
-                  wireframeSubTab === 'sitemap' ? 'bg-black text-white' : 'bg-[#F7F7F5] text-black hover:bg-white'
-                }`}
-              >
-                Sitemap Graph
-              </button>
-              <button
-                onClick={() => setWireframeSubTab('devnotes')}
-                className={`px-4 py-2 rounded-xl font-bold border border-black ${
-                  wireframeSubTab === 'devnotes' ? 'bg-black text-white' : 'bg-[#F7F7F5] text-black hover:bg-white'
-                }`}
-              >
-                Developer Handoff
-              </button>
-            </div>
-
-            {wireframeSubTab === 'blueprint' && <WireframeKitView />}
-            {wireframeSubTab === 'tokens' && <DesignTokensView />}
-            {wireframeSubTab === 'sitemap' && <FlowMapView />}
-            {wireframeSubTab === 'devnotes' && <DevNotesView />}
-          </div>
-        )}
+        {viewMode === 'wireframes' && <WireframeKitView />}
+        {viewMode === 'tokens' && <DesignTokensView />}
+        {viewMode === 'flow' && <FlowMapView />}
+        {viewMode === 'devnotes' && <DevNotesView />}
       </div>
 
       {/* Mobile Bottom Navigation */}
-      {viewMode === 'interactive' && (
+      {viewMode === 'app' && (
         <BottomNav
           activeTab={activeTab}
           setActiveTab={setActiveTab}
