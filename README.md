@@ -4,7 +4,7 @@ The creative network connecting Ohio’s creative community — UI foundation an
 
 **Repository:** https://github.com/Rob-code-94/HUO-APP  
 **Google AI Studio app:** https://ai.studio/apps/a17ea1b2-e391-4d40-9790-36ecc7066132  
-**Client demo host:** Vercel (after first deploy — see [`docs/WORKFLOW.md`](docs/WORKFLOW.md))
+**Client demo (Vercel):** https://huo-app.vercel.app
 
 ## Workflow (locked)
 

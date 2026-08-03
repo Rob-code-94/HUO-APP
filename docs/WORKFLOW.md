@@ -32,7 +32,7 @@ npm run preview  # preview the production build locally
 1. Sign up at https://vercel.com with GitHub (`Rob-code-94`).
 2. **Add New Project** → import `Rob-code-94/HUO-APP`.
 3. Framework preset: **Vite** (auto-detected). Build: `npm run build`. Output: `dist`.
-4. Deploy. You get a URL like `https://huo-app.vercel.app`.
+4. Deploy. Live client demo: **https://huo-app.vercel.app**
 5. Send that URL to the client — no AI Studio chrome, no Google Cloud billing.
 
 Optional CLI:
