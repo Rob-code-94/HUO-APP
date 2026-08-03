@@ -34,12 +34,14 @@ Launch: Columbus beta → Ohio expansion → city-based national model.
 Local Milanote screenshots and wireframes: `Design Reference/`.
 
 Primary repo going forward: https://github.com/Rob-code-94/HUO-APP  
-Legacy foundation-only repo: https://github.com/Rob-code-94/HUO
+Legacy foundation-only repo: https://github.com/Rob-code-94/HUO  
+Google AI Studio app (general access): https://ai.studio/apps/a17ea1b2-e391-4d40-9790-36ecc7066132
 
 Protect existing UI under `src/` — consolidate docs/design assets without overwriting app code.
 
 ## Reference links
 
+- Google AI Studio app: https://ai.studio/apps/a17ea1b2-e391-4d40-9790-36ecc7066132
 - Milanote: https://app.milanote.com/1WwClh1atNkUec/creative-network
 - Google Doc: https://docs.google.com/document/d/1z4yMjz9fIquliGT0XiXPiNK4cELBv344BUBZAcP317Y/edit?tab=t.0
 

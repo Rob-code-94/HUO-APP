@@ -10,6 +10,7 @@ older Google Doc / Milanote notes disagree.
 | --- | --- | --- |
 | Product Bible | [`docs/PRODUCT-BIBLE.md`](PRODUCT-BIBLE.md) | Brand, MVP, pricing, GTM — primary |
 | Google Studio UI prompt | [`docs/GOOGLE-STUDIO-UI-PROMPT.md`](GOOGLE-STUDIO-UI-PROMPT.md) | Prompt for UI-only generation |
+| Google AI Studio app | https://ai.studio/apps/a17ea1b2-e391-4d40-9790-36ecc7066132 | General access link to the generated UI app |
 | Milanote board | https://app.milanote.com/1WwClh1atNkUec/creative-network | Visual / layout inspiration |
 | Google Doc | https://docs.google.com/document/d/1z4yMjz9fIquliGT0XiXPiNK4cELBv344BUBZAcP317Y/edit?tab=t.0 | Early written concept |
 | Repository | https://github.com/Rob-code-94/HUO-APP.git | Primary app codebase (going forward) |

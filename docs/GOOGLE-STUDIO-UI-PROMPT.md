@@ -3,6 +3,8 @@
 Copy everything below the line into Google AI Studio. Upload the reference images listed
 at the end. **UI style and layout only** — backend is built separately in Cursor.
 
+**Live Studio app (general access):** https://ai.studio/apps/a17ea1b2-e391-4d40-9790-36ecc7066132
+
 Product source of truth: [`PRODUCT-BIBLE.md`](PRODUCT-BIBLE.md) · Summary: [`FOUNDATION.md`](FOUNDATION.md)
 
 ---

@@ -2,7 +2,8 @@
 
 The creative network connecting Ohio’s creative community — UI foundation and app codebase.
 
-**Repository:** https://github.com/Rob-code-94/HUO-APP
+**Repository:** https://github.com/Rob-code-94/HUO-APP  
+**Google AI Studio app (general access):** https://ai.studio/apps/a17ea1b2-e391-4d40-9790-36ecc7066132
 
 ## What’s in this repo
 
