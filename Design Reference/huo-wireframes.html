@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Huo — Wireframes v1</title>
+<style>
+  :root{
+    --paper:#e9e9e6;
+    --frame:#ffffff;
+    --line:#1a1a1a;
+    --line-soft:#9a9a94;
+    --gray-1:#dcdcd8;
+    --gray-2:#c7c7c1;
+    --gray-3:#b0b0a9;
+    --accent:#ff3c75; /* Huo pink, used ONLY as a sparse wire annotation, not decoration */
+    --mono: 'Courier New', ui-monospace, monospace;
+    --sans: Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    font-family:var(--sans);
+    color:var(--line);
+    padding:40px 24px 120px;
+  }
+  .kit-header{
+    max-width:1400px;
+    margin:0 auto 48px;
+    border-bottom:2px solid var(--line);
+    padding-bottom:20px;
+  }
+  .kit-header h1{
+    font-family:var(--mono);
+    font-size:22px;
+    letter-spacing:1px;
+    margin:0 0 6px;
+    text-transform:uppercase;
+  }
+  .kit-header p{
+    font-family:var(--mono);
+    font-size:12px;
+    color:#555;
+    margin:0;
+  }
+  .stage-label{
+    max-width:1400px;
+    margin:64px auto 20px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .stage-label .num{
+    font-family:var(--mono);
+    font-size:12px;
+    border:1px solid var(--line);
+    padding:2px 8px;
+  }
+  .stage-label h2{
+    font-family:var(--mono);
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    margin:0;
+  }
+  .row{
+    max-width:1400px;
+    margin:0 auto;
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px;
+    align-items:flex-start;
+  }
+  .screen-block{
+    width:250px;
+  }
+  .screen-name{
+    font-family:var(--mono);
+    font-size:11px;
+    margin-bottom:8px;
+    color:#333;
+  }
+  .phone{
+    width:250px;
+    height:520px;
+    background:var(--frame);
+    border:2px solid var(--line);
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+  .statusbar{
+    height:18px;
+    border-bottom:1px solid var(--line-soft);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 8px;
+    font-family:var(--mono);
+    font-size:8px;
+    color:var(--line-soft);
+    flex-shrink:0;
+  }
+  .screen{
+    flex:1;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+  }
+  /* generic wire elements */
+  .wire-box{
+    border:1.5px solid var(--line);
+    background:var(--frame);
+  }
+  .placeholder-img{
+    border:1.5px solid var(--line);
+    background:
+      linear-gradient(to top left, transparent calc(50% - 0.5px), var(--line-soft), transparent calc(50% + 0.5px)),
+      linear-gradient(to top right, transparent calc(50% - 0.5px), var(--line-soft), transparent calc(50% + 0.5px)),
+      var(--gray-1);
+  }
+  .bar-line{
+    height:8px;
+    background:var(--gray-2);
+  }
+  .bar-line.short{width:60%;}
+  .bar-line.tiny{height:6px;background:var(--gray-1);}
+  .lbl{
+    font-family:var(--mono);
+    font-size:8px;
+    color:var(--line-soft);
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+  }
+  .btn{
+    border:1.5px solid var(--line);
+    text-align:center;
+    font-family:var(--mono);
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    padding:8px 0;
+  }
+  .btn.solid{
+    background:var(--line);
+    color:var(--frame);
+  }
+  .pill{
+    border:1.2px solid var(--line);
+    border-radius:20px;
+    font-family:var(--mono);
+    font-size:7.5px;
+    text-align:center;
+    padding:4px 6px;
+    text-transform:uppercase;
+  }
+  .pill.on{background:var(--line);color:#fff;}
+  /* bottom nav — icons only, no dividers, no boxes */
+  .bottomnav{
+    height:46px;
+    border-top:1.5px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-around;
+    flex-shrink:0;
+  }
+  .navitem{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+  .navicon{
+    width:20px;
+    height:20px;
+    display:block;
+  }
+  .navicon svg{
+    width:100%;
+    height:100%;
+    stroke:var(--line-soft);
+    stroke-width:1.5;
+    fill:none;
+  }
+  .navitem.active .navicon svg{
+    stroke:var(--line);
+    stroke-width:2.2;
+  }
+  .navitem.plusitem .navicon{width:24px;height:24px;}
+  .navitem .dot{
+    width:5px;height:5px;border-radius:50%;background:var(--accent);
+    position:absolute; top:-2px; right:-3px;
+  }
+  .navitem.navitem-locked .navicon svg{stroke:var(--line-soft);opacity:0.45;}
+  .navitem .lockbadge{
+    position:absolute; bottom:-3px; right:-6px;
+    font-size:7px; line-height:1;
+  }
+  /* annotations */
+  .annotations{
+    width:250px;
+    font-family:var(--mono);
+    font-size:9.5px;
+    line-height:1.5;
+    color:#333;
+  }
+  .annotations li{margin-bottom:6px;}
+  .annotations .flag{color:var(--accent);font-weight:bold;}
+  .toptab{
+    display:flex;
+    border-bottom:1.5px solid var(--line);
+  }
+  .toptab div{
+    flex:1;
+    text-align:center;
+    font-family:var(--mono);
+    font-size:9px;
+    text-transform:uppercase;
+    padding:8px 0;
+  }
+  .toptab div.active{border-bottom:2px solid var(--accent);font-weight:bold;}
+  /* home top bar with notification bell */
+  .topbar{
+    height:34px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 12px;
+    border-bottom:1.5px solid var(--line);
+    flex-shrink:0;
+  }
+  .topbar-brand{
+    font-family:'Arial Black', Helvetica, sans-serif;
+    font-weight:900;
+    color:#FF3C75;
+    font-size:13px;
+    letter-spacing:-0.5px;
+  }
+  .bell{width:19px;height:19px;position:relative;}
+  .bell svg{width:100%;height:100%;stroke:var(--line);stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+  .bell .dot{top:-1px;right:-1px;}
+  .lock-icon{
+    font-family:var(--mono);
+    font-size:9px;
+    border:1px solid var(--line);
+    padding:1px 5px;
+  }
+  .divider{border-top:1px dashed var(--line-soft);}
+  .flowarrow{
+    align-self:center;
+    font-family:var(--mono);
+    font-size:20px;
+    color:var(--line-soft);
+    margin:0 -6px;
+    padding-top:220px;
+  }
+  .legend{
+    max-width:1400px;
+    margin:0 auto 8px;
+    font-family:var(--mono);
+    font-size:10px;
+    color:#555;
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  .legend span{display:flex;align-items:center;gap:6px;}
+  .swatch{width:12px;height:12px;border:1px solid var(--line);display:inline-block;}
+  /* logomark — actual Huo brand wordmark: bold pink HUO */
+  .logomark{display:flex;flex-direction:column;align-items:center;}
+  .logomark-word{
+    font-family:'Arial Black', Helvetica, sans-serif;
+    font-weight:900;
+    letter-spacing:-1px;
+    color:#FF3C75;
+    text-transform:uppercase;
+    font-size:32px;
+  }
+  .logomark.small .logomark-word{font-size:18px;}
+  .logomark.on-dark{}
+</style>
+</head>
+<body>
+
+<div class="kit-header">
+  <h1>Huo — Wireframe Kit / v1</h1>
+  <p>Low-fidelity structural wires · greyscale · annotations in pink flag key decisions from the product bible · not final visual design</p>
+</div>
+
+<!-- ============ STAGE 0: ONBOARDING GATE ============ -->
+<div class="stage-label"><span class="num">00</span><h2>Beta Gate → Welcome</h2></div>
+<div class="row">
+
+  <div class="screen-block">
+    <div class="screen-name">Splash</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="align-items:center;justify-content:center;background:#000;">
+        <div class="logomark"><span class="logomark-word">HUO</span></div>
+        <div class="lbl" style="margin-top:10px;color:#888;">creative network</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Invite Code</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:20px 16px;">
+        <div class="lbl" style="margin-bottom:4px;">Huo — Creative Network</div>
+        <div style="font-family:var(--mono);font-weight:bold;font-size:13px;margin-bottom:20px;">You're invited.</div>
+        <div class="lbl">Enter beta code</div>
+        <div class="wire-box" style="height:34px;margin:6px 0 16px;"></div>
+        <div class="btn solid">Continue</div>
+        <div class="lbl" style="margin-top:auto;padding-top:220px;">No code? Join waitlist →</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Welcome to Huo</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:20px 16px;align-items:center;justify-content:center;text-align:center;">
+        <div class="logomark small" style="margin-bottom:14px;"><span class="logomark-word">HUO</span></div>
+        <div style="font-family:var(--mono);font-weight:bold;font-size:16px;">Welcome to Huo</div>
+        <div class="bar-line short" style="margin:14px auto;"></div>
+        <div class="bar-line" style="width:80%;margin:0 auto 6px;"></div>
+        <div class="bar-line" style="width:70%;margin:0 auto 20px;"></div>
+        <div class="btn solid" style="width:100%;">Get started</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Login / Signup</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:20px 16px;">
+        <div style="font-family:var(--mono);font-weight:bold;font-size:14px;margin-bottom:16px;">Log in or sign up</div>
+        <div class="lbl">Email</div>
+        <div class="wire-box" style="height:30px;margin:4px 0 10px;"></div>
+        <div class="lbl">Password</div>
+        <div class="wire-box" style="height:30px;margin:4px 0 16px;"></div>
+        <div class="btn solid" style="margin-bottom:10px;">Log in</div>
+        <div class="btn">Create account</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annotations">
+    <ul>
+      <li><span class="flag">▲</span> Gate order per spec: invite code validates → Welcome → Login/Signup (not the reverse).</li>
+      <li>Beta code screen doubles as brand intro — first thing an invited creative sees.</li>
+      <li>Waitlist link for anyone without a code, low-emphasis at bottom.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ STAGE 1: SIGNUP ============ -->
+<div class="stage-label"><span class="num">01</span><h2>Signup → Account Type → Profile Setup</h2></div>
+<div class="row">
+
+  <div class="screen-block">
+    <div class="screen-name">Signup — Basics</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:20px 16px;">
+        <div class="lbl">Step 1 / 5</div>
+        <div style="font-family:var(--mono);font-weight:bold;font-size:13px;margin:6px 0 16px;">Create your account</div>
+        <div class="lbl">Name</div><div class="wire-box" style="height:28px;margin:4px 0 10px;"></div>
+        <div class="lbl">Email</div><div class="wire-box" style="height:28px;margin:4px 0 10px;"></div>
+        <div class="lbl">Phone number</div><div class="wire-box" style="height:28px;margin:4px 0 16px;"></div>
+        <div class="btn solid">Next</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Verify — code sent</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:20px 16px;">
+        <div class="lbl">Step 2 / 5</div>
+        <div style="font-family:var(--mono);font-weight:bold;font-size:13px;margin:6px 0 6px;">Verify it's you</div>
+        <div class="lbl" style="margin-bottom:16px;">Code sent to e***@email.com</div>
+        <div style="display:flex;gap:6px;margin-bottom:16px;">
+          <div class="wire-box" style="width:32px;height:38px;"></div>
+          <div class="wire-box" style="width:32px;height:38px;"></div>
+          <div class="wire-box" style="width:32px;height:38px;"></div>
+          <div class="wire-box" style="width:32px;height:38px;"></div>
+          <div class="wire-box" style="width:32px;height:38px;"></div>
+          <div class="wire-box" style="width:32px;height:38px;"></div>
+        </div>
+        <div class="btn solid" style="margin-bottom:10px;">Verify</div>
+        <div class="lbl" style="text-align:center;">Resend code · Use phone instead</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Account Type</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:20px 16px;">
+        <div class="lbl">Step 3 / 5</div>
+        <div style="font-family:var(--mono);font-weight:bold;font-size:13px;margin:6px 0 16px;">How will you use Huo?</div>
+        <div class="wire-box" style="padding:12px;margin-bottom:10px;">
+          <div style="font-family:var(--mono);font-size:10px;font-weight:bold;">Creative</div>
+          <div class="lbl" style="margin-top:3px;">showcase work, find gigs</div>
+        </div>
+        <div class="wire-box" style="padding:12px;margin-bottom:10px;">
+          <div style="font-family:var(--mono);font-size:10px;font-weight:bold;">Business</div>
+          <div class="lbl" style="margin-top:3px;">find + hire creative talent</div>
+        </div>
+        <div class="wire-box" style="padding:12px;">
+          <div style="font-family:var(--mono);font-size:10px;font-weight:bold;">Consumer</div>
+          <div class="lbl" style="margin-top:3px;">discover local creativity</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Profile Basics (Creative)</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:20px 16px;">
+        <div class="lbl">Step 4 / 5</div>
+        <div style="font-family:var(--mono);font-weight:bold;font-size:13px;margin:6px 0 12px;">Tell us about you</div>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
+          <div class="placeholder-img" style="width:40px;height:40px;border-radius:50%;flex-shrink:0;"></div>
+          <div class="lbl">add photo</div>
+        </div>
+        <div class="lbl">Title (e.g. Photographer)</div><div class="wire-box" style="height:26px;margin:4px 0 8px;"></div>
+        <div class="lbl">Bio</div><div class="wire-box" style="height:44px;margin:4px 0 8px;"></div>
+        <div class="lbl">Location · Education</div><div class="wire-box" style="height:26px;margin:4px 0 12px;"></div>
+        <div class="btn solid">Next</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Skill Tags (multi-select)</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:20px 16px;">
+        <div class="lbl">Step 5 / 5</div>
+        <div style="font-family:var(--mono);font-weight:bold;font-size:13px;margin:6px 0 4px;">Pick your categories</div>
+        <div class="lbl" style="margin-bottom:10px;">select all that apply</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;">
+          <div class="pill on">Photo</div><div class="pill">Video</div><div class="pill on">Music</div>
+          <div class="pill">Design</div><div class="pill">Writing</div><div class="pill on">Styling</div>
+          <div class="pill">Set Build</div><div class="pill">Other…</div>
+        </div>
+        <div class="btn solid">Finish</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Profile Basics (Consumer)</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:20px 16px;">
+        <div class="lbl">Step 4 / 4</div>
+        <div style="font-family:var(--mono);font-weight:bold;font-size:13px;margin:6px 0 12px;">Set up your profile</div>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
+          <div class="placeholder-img" style="width:40px;height:40px;border-radius:50%;flex-shrink:0;"></div>
+          <div class="lbl">add photo</div>
+        </div>
+        <div class="lbl">Name</div><div class="wire-box" style="height:26px;margin:4px 0 8px;"></div>
+        <div class="lbl">What are you into? (optional)</div>
+        <div style="display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 14px;">
+          <div class="pill on">Photography</div><div class="pill">Live music</div><div class="pill on">Design</div>
+        </div>
+        <div class="btn solid">Finish</div>
+        <div class="lbl" style="margin-top:8px;text-align:center;">Portfolio + full profile unlock if you upgrade later</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annotations">
+    <ul>
+      <li><span class="flag">▲</span> Verification (step 2) sits right after basics, before account type — a code sent to whichever of email/phone they used, with a fallback to switch methods.</li>
+      <li><span class="flag">▲</span> Tags are multi-select from v1, and include an open "Other" tag — signals Huo welcomes uncommon creative disciplines, not just the obvious ones.</li>
+      <li>Business flow mirrors this (company basics → verify → industry tags) but is not wired separately here — same shape, different fields.</li>
+      <li><span class="flag">▲</span> Consumer now gets a lightweight profile too (name, photo, optional interests) instead of skipping straight to Home — keeps them engaged and gives them a head start if they later upgrade to unlock portfolio/bio/tags.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ STAGE 2: HOME ============ -->
+<div class="stage-label"><span class="num">02</span><h2>Home — Feed Toggle</h2></div>
+<div class="row">
+
+  <div class="screen-block">
+    <div class="screen-name">Home — Portfolio Feed</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="topbar"><span class="topbar-brand">HUO</span><span class="bell"><svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 0-5 5v3.2c0 1.1-.4 2.1-1.2 2.9L5 15h14l-.8-.9c-.8-.8-1.2-1.8-1.2-2.9V8a5 5 0 0 0-5-5z"/><path d="M9.5 18a2.5 2.5 0 0 0 5 0"/></svg><span class="dot"></span></span></div>
+      <div class="toptab"><div class="active">Portfolio</div><div>Community</div></div>
+      <div class="screen" style="padding:12px;gap:10px;overflow:hidden;">
+        <div class="wire-box" style="padding:8px;">
+          <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px;">
+            <div class="placeholder-img" style="width:20px;height:20px;border-radius:50%;"></div>
+            <div class="bar-line tiny" style="width:70px;"></div>
+          </div>
+          <div class="placeholder-img" style="height:100px;"></div>
+        </div>
+        <div class="wire-box" style="padding:8px;">
+          <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px;">
+            <div class="placeholder-img" style="width:20px;height:20px;border-radius:50%;"></div>
+            <div class="bar-line tiny" style="width:70px;"></div>
+          </div>
+          <div class="placeholder-img" style="height:100px;"></div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="navitem active"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5L12 4.5l8 7V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1V11.5z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span></div>
+        <div class="navitem plusitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span><span class="dot"></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Home — Community Feed</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="topbar"><span class="topbar-brand">HUO</span><span class="bell"><svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 0-5 5v3.2c0 1.1-.4 2.1-1.2 2.9L5 15h14l-.8-.9c-.8-.8-1.2-1.8-1.2-2.9V8a5 5 0 0 0-5-5z"/><path d="M9.5 18a2.5 2.5 0 0 0 5 0"/></svg><span class="dot"></span></span></div>
+      <div class="toptab"><div>Portfolio</div><div class="active">Community</div></div>
+      <div class="screen" style="padding:12px;gap:8px;overflow:hidden;">
+        <div class="wire-box" style="padding:8px;">
+          <div style="display:flex;gap:6px;align-items:center;margin-bottom:5px;">
+            <div class="placeholder-img" style="width:18px;height:18px;border-radius:50%;"></div>
+            <div class="bar-line tiny" style="width:60px;"></div>
+          </div>
+          <div class="bar-line" style="margin-bottom:3px;"></div>
+          <div class="bar-line short"></div>
+        </div>
+        <div class="wire-box" style="padding:8px;">
+          <div style="display:flex;gap:6px;align-items:center;margin-bottom:5px;">
+            <div class="placeholder-img" style="width:18px;height:18px;border-radius:50%;"></div>
+            <div class="bar-line tiny" style="width:60px;"></div>
+          </div>
+          <div class="placeholder-img" style="height:70px;"></div>
+        </div>
+        <div class="wire-box" style="padding:8px;">
+          <div style="display:flex;gap:6px;align-items:center;margin-bottom:5px;">
+            <div class="placeholder-img" style="width:18px;height:18px;border-radius:50%;"></div>
+            <div class="bar-line tiny" style="width:60px;"></div>
+          </div>
+          <div class="bar-line"></div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="navitem active"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5L12 4.5l8 7V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1V11.5z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span></div>
+        <div class="navitem plusitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span><span class="dot"></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Home — Consumer, Portfolio tab</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="topbar"><span class="topbar-brand">HUO</span><span class="bell"><svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 0-5 5v3.2c0 1.1-.4 2.1-1.2 2.9L5 15h14l-.8-.9c-.8-.8-1.2-1.8-1.2-2.9V8a5 5 0 0 0-5-5z"/><path d="M9.5 18a2.5 2.5 0 0 0 5 0"/></svg></span></div>
+      <div class="toptab"><div class="active">Portfolio</div><div>Community</div></div>
+      <div class="screen" style="padding:12px;gap:10px;overflow:hidden;">
+        <div class="wire-box" style="padding:8px;">
+          <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px;">
+            <div class="placeholder-img" style="width:20px;height:20px;border-radius:50%;"></div>
+            <div class="bar-line tiny" style="width:70px;"></div>
+          </div>
+          <div class="placeholder-img" style="height:90px;margin-bottom:6px;"></div>
+          <div style="display:flex;gap:10px;">
+            <span class="navicon" style="width:15px;height:15px;"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--line);"><path d="M12 19c-4-2.8-8-6-8-10a4 4 0 0 1 8-1.3A4 4 0 0 1 20 9c0 4-4 7.2-8 10z"/></svg></span>
+            <span class="navicon" style="width:15px;height:15px;"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--line);"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span>
+            <span class="navicon" style="width:15px;height:15px;margin-left:auto;"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--line);"><path d="M6 4h12v16l-6-4-6 4V4z"/></svg></span>
+          </div>
+        </div>
+        <div class="wire-box" style="padding:8px;">
+          <div style="display:flex;gap:6px;align-items:center;margin-bottom:6px;">
+            <div class="placeholder-img" style="width:20px;height:20px;border-radius:50%;"></div>
+            <div class="bar-line tiny" style="width:70px;"></div>
+          </div>
+          <div class="placeholder-img" style="height:90px;margin-bottom:6px;"></div>
+          <div style="display:flex;gap:10px;">
+            <span class="navicon" style="width:15px;height:15px;"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--line);"><path d="M12 19c-4-2.8-8-6-8-10a4 4 0 0 1 8-1.3A4 4 0 0 1 20 9c0 4-4 7.2-8 10z"/></svg></span>
+            <span class="navicon" style="width:15px;height:15px;"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--line);"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span>
+            <span class="navicon" style="width:15px;height:15px;margin-left:auto;"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--line);"><path d="M6 4h12v16l-6-4-6 4V4z"/></svg></span>
+          </div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="navitem active"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5L12 4.5l8 7V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1V11.5z"/></svg></span></div>
+        <div class="navitem navitem-locked"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span><span class="lockbadge">🔒</span></div>
+        <div class="navitem plusitem navitem-locked"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span><span class="lockbadge">🔒</span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Home — Consumer, Community tab</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="topbar"><span class="topbar-brand">HUO</span><span class="bell"><svg viewBox="0 0 24 24"><path d="M12 3a5 5 0 0 0-5 5v3.2c0 1.1-.4 2.1-1.2 2.9L5 15h14l-.8-.9c-.8-.8-1.2-1.8-1.2-2.9V8a5 5 0 0 0-5-5z"/><path d="M9.5 18a2.5 2.5 0 0 0 5 0"/></svg></span></div>
+      <div class="toptab"><div>Portfolio</div><div class="active">Community</div></div>
+      <div class="screen" style="padding:12px;gap:8px;overflow:hidden;">
+        <div class="wire-box" style="padding:8px;">
+          <div style="display:flex;gap:6px;align-items:center;margin-bottom:5px;">
+            <div class="placeholder-img" style="width:18px;height:18px;border-radius:50%;"></div>
+            <div class="bar-line tiny" style="width:60px;"></div>
+          </div>
+          <div class="placeholder-img" style="height:80px;"></div>
+        </div>
+        <div class="wire-box" style="padding:8px;">
+          <div style="display:flex;gap:6px;align-items:center;margin-bottom:5px;">
+            <div class="placeholder-img" style="width:18px;height:18px;border-radius:50%;"></div>
+            <div class="bar-line tiny" style="width:60px;"></div>
+          </div>
+          <div class="bar-line"></div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="navitem active"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5L12 4.5l8 7V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1V11.5z"/></svg></span></div>
+        <div class="navitem navitem-locked"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span><span class="lockbadge">🔒</span></div>
+        <div class="navitem plusitem navitem-locked"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span><span class="lockbadge">🔒</span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annotations">
+    <ul>
+      <li>Portfolio feed = work/BTS posts only; Community feed mixes creative + business + consumer posts — "IG feed × Twitter feed."</li>
+      <li><span class="flag">▲</span> Consumer now gets the same Portfolio/Community toggle as everyone else — the Portfolio tab is Huo's "Pinterest" surface for them: browse for inspiration and like, comment, and save posts, without a gig marketplace.</li>
+      <li><span class="flag">▲</span> Open question, wired as an option: Search + Action greyed/locked for Consumer with an "upgrade to unlock" prompt on tap — flagged in the bible as still undecided.</li>
+      <li><span class="flag">▲</span> Notification bell now sits top-right of Home across all three account types, with an unread dot; taps into the new Notifications stage below.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ STAGE 2.5: NOTIFICATIONS ============ -->
+<div class="stage-label"><span class="num">02b</span><h2>Notifications</h2></div>
+<div class="row">
+
+  <div class="screen-block">
+    <div class="screen-name">Notifications — All</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:0;">
+        <div style="padding:14px 14px 0;font-family:var(--mono);font-weight:bold;font-size:13px;">Notifications</div>
+        <div class="toptab" style="margin-top:10px;"><div class="active">All</div><div>Requests</div></div>
+        <div style="padding:12px;overflow:hidden;">
+          <div class="lbl" style="margin-bottom:6px;">New</div>
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:12px;">
+            <div class="placeholder-img" style="width:30px;height:30px;border-radius:50%;flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div class="bar-line tiny" style="width:150px;margin-bottom:4px;"></div>
+              <div class="lbl">wants to connect · 2m</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin:-4px 0 12px 38px;">
+            <div class="btn solid" style="flex:1;padding:5px 0;">Accept</div>
+            <div class="btn" style="flex:1;padding:5px 0;">Decline</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:12px;">
+            <div class="placeholder-img" style="width:30px;height:30px;border-radius:50%;flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div class="bar-line tiny" style="width:160px;margin-bottom:4px;"></div>
+              <div class="lbl">your application was accepted · 1h</div>
+            </div>
+          </div>
+          <div class="divider" style="margin:10px 0;"></div>
+          <div class="lbl" style="margin:8px 0 6px;">Earlier</div>
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:12px;">
+            <div class="placeholder-img" style="width:30px;height:30px;border-radius:50%;flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div class="bar-line tiny" style="width:140px;margin-bottom:4px;"></div>
+              <div class="lbl">liked your post · 5h</div>
+            </div>
+            <div class="placeholder-img" style="width:28px;height:28px;flex-shrink:0;"></div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:flex-start;">
+            <div class="placeholder-img" style="width:30px;height:30px;border-radius:50%;flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div class="bar-line tiny" style="width:150px;margin-bottom:4px;"></div>
+              <div class="lbl">commented: "love this" · 1d</div>
+            </div>
+            <div class="placeholder-img" style="width:28px;height:28px;flex-shrink:0;"></div>
+          </div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5L12 4.5l8 7V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1V11.5z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span></div>
+        <div class="navitem plusitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Notifications — Requests</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:0;">
+        <div style="padding:14px 14px 0;font-family:var(--mono);font-weight:bold;font-size:13px;">Notifications</div>
+        <div class="toptab" style="margin-top:10px;"><div>All</div><div class="active">Requests</div></div>
+        <div style="padding:12px;overflow:hidden;">
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:10px;">
+            <div class="placeholder-img" style="width:30px;height:30px;border-radius:50%;flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div class="bar-line tiny" style="width:150px;margin-bottom:4px;"></div>
+              <div class="lbl">wants to connect</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin:-2px 0 14px 38px;">
+            <div class="btn solid" style="flex:1;padding:5px 0;">Accept</div>
+            <div class="btn" style="flex:1;padding:5px 0;">Decline</div>
+          </div>
+          <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:10px;">
+            <div class="placeholder-img" style="width:30px;height:30px;border-radius:50%;flex-shrink:0;"></div>
+            <div style="flex:1;">
+              <div class="bar-line tiny" style="width:150px;margin-bottom:4px;"></div>
+              <div class="lbl">wants to connect</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin:-2px 0 0 38px;">
+            <div class="btn solid" style="flex:1;padding:5px 0;">Accept</div>
+            <div class="btn" style="flex:1;padding:5px 0;">Decline</div>
+          </div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5L12 4.5l8 7V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1V11.5z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span></div>
+        <div class="navitem plusitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annotations">
+    <ul>
+      <li>Covers the four types called out: connect requests (Accept/Decline inline), gig application status, and likes/comments on posts.</li>
+      <li><span class="flag">▲</span> Split into All / Requests tabs so a connect request never gets buried under a wave of likes — Requests only ever shows things that need a decision.</li>
+      <li>Tapping a like/comment or status item routes to that post or gig; tapping a name routes to that profile.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ STAGE 3: SEARCH / DISCOVER ============ -->
+<div class="stage-label"><span class="num">03</span><h2>Search / Discover</h2></div>
+<div class="row">
+
+  <div class="screen-block">
+    <div class="screen-name">Discover — Filters</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:14px;">
+        <div class="wire-box" style="height:30px;margin-bottom:10px;display:flex;align-items:center;padding:0 8px;"><span class="lbl">Search Huo</span></div>
+        <div style="display:flex;gap:6px;margin-bottom:12px;">
+          <div class="pill on">Creatives</div><div class="pill">Gigs</div><div class="pill">Businesses</div>
+        </div>
+        <div class="wire-box" style="padding:8px;margin-bottom:8px;display:flex;gap:8px;align-items:center;">
+          <div class="placeholder-img" style="width:32px;height:32px;border-radius:50%;"></div>
+          <div style="flex:1;"><div class="bar-line tiny" style="margin-bottom:4px;"></div><div class="bar-line tiny short"></div></div>
+        </div>
+        <div class="wire-box" style="padding:8px;margin-bottom:8px;display:flex;gap:8px;align-items:center;">
+          <div class="placeholder-img" style="width:32px;height:32px;border-radius:50%;"></div>
+          <div style="flex:1;"><div class="bar-line tiny" style="margin-bottom:4px;"></div><div class="bar-line tiny short"></div></div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5L12 4.5l8 7V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1V11.5z"/></svg></span></div>
+        <div class="navitem active"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span></div>
+        <div class="navitem plusitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Gig List</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:14px;">
+        <div style="font-family:var(--mono);font-weight:bold;font-size:12px;margin-bottom:10px;">Gigs near Columbus</div>
+        <div class="wire-box" style="padding:8px;margin-bottom:8px;">
+          <div class="bar-line" style="width:80%;margin-bottom:4px;"></div>
+          <div class="bar-line tiny short"></div>
+          <div class="lbl" style="margin-top:6px;">$ · date · location</div>
+        </div>
+        <div class="wire-box" style="padding:8px;margin-bottom:8px;">
+          <div class="bar-line" style="width:80%;margin-bottom:4px;"></div>
+          <div class="bar-line tiny short"></div>
+          <div class="lbl" style="margin-top:6px;">$ · date · location</div>
+        </div>
+        <div class="wire-box" style="padding:8px;">
+          <div class="bar-line" style="width:80%;margin-bottom:4px;"></div>
+          <div class="bar-line tiny short"></div>
+          <div class="lbl" style="margin-top:6px;">$ · date · location</div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5L12 4.5l8 7V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1V11.5z"/></svg></span></div>
+        <div class="navitem active"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span></div>
+        <div class="navitem plusitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Gig Detail — free user, allowance left</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:14px;">
+        <div style="font-family:var(--mono);font-weight:bold;font-size:12px;margin-bottom:6px;">Wedding videographer</div>
+        <div class="lbl" style="margin-bottom:8px;">$400 · Aug 14 · Columbus</div>
+        <div class="bar-line" style="margin-bottom:3px;"></div>
+        <div class="bar-line" style="margin-bottom:3px;"></div>
+        <div class="bar-line short" style="margin-bottom:12px;"></div>
+        <div class="btn solid" style="margin-bottom:6px;">Apply</div>
+        <div class="lbl" style="text-align:center;">2 of 3 free applications left</div>
+      </div>
+      <div class="bottomnav">
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5L12 4.5l8 7V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1V11.5z"/></svg></span></div>
+        <div class="navitem active"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span></div>
+        <div class="navitem plusitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Gig Detail — allowance used</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:14px;">
+        <div style="font-family:var(--mono);font-weight:bold;font-size:12px;margin-bottom:6px;">Wedding videographer</div>
+        <div class="lbl" style="margin-bottom:8px;">$400 · Aug 14 · Columbus</div>
+        <div class="bar-line" style="margin-bottom:3px;"></div>
+        <div class="bar-line" style="margin-bottom:3px;"></div>
+        <div class="bar-line short" style="margin-bottom:12px;"></div>
+        <div class="wire-box" style="padding:10px;text-align:center;">
+          <span class="lock-icon">🔒</span>
+          <div style="font-family:var(--mono);font-size:9px;margin-top:6px;">Free applications used</div>
+          <div class="btn solid" style="margin-top:8px;">Upgrade to Huo Pro</div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5L12 4.5l8 7V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1V11.5z"/></svg></span></div>
+        <div class="navitem active"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span></div>
+        <div class="navitem plusitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annotations">
+    <ul>
+      <li><span class="flag">▲</span> Full gig title/description/pay is always visible to everyone — the lock only ever covers the Apply action, never the content.</li>
+      <li>Lifetime allowance (3 applications total) counts down here, not monthly — avoids "use it or lose it" reset pressure.</li>
+      <li>Same lock pattern reused for the 3rd connection/DM request.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ STAGE 4: ACTION (+) ============ -->
+<div class="stage-label"><span class="num">04</span><h2>Action (+) — Post Menu → Post a Gig</h2></div>
+<div class="row">
+
+  <div class="screen-block">
+    <div class="screen-name">Action Sheet</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="justify-content:flex-end;">
+        <div class="wire-box" style="border-bottom:none;padding:16px;">
+          <div class="lbl" style="margin-bottom:10px;">create</div>
+          <div class="btn" style="margin-bottom:8px;text-align:left;padding-left:10px;">Showcase work</div>
+          <div class="btn" style="margin-bottom:8px;text-align:left;padding-left:10px;">Post a gig</div>
+          <div class="btn" style="margin-bottom:8px;text-align:left;padding-left:10px;">Build a team</div>
+          <div class="btn" style="margin-bottom:8px;text-align:left;padding-left:10px;">Find collaborators</div>
+          <div class="btn" style="text-align:left;padding-left:10px;">Ask the community</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Post a Gig — form</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:16px;">
+        <div style="font-family:var(--mono);font-weight:bold;font-size:12px;margin-bottom:10px;">Post a gig</div>
+        <div class="lbl">Title</div><div class="wire-box" style="height:26px;margin:4px 0 8px;"></div>
+        <div class="lbl">Description</div><div class="wire-box" style="height:44px;margin:4px 0 8px;"></div>
+        <div class="lbl">Pay</div><div class="wire-box" style="height:26px;margin:4px 0 8px;"></div>
+        <div class="lbl">Location · Date</div><div class="wire-box" style="height:26px;margin:4px 0 12px;"></div>
+        <div class="btn solid">Post gig</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Showcase Work — form</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:16px;">
+        <div style="font-family:var(--mono);font-weight:bold;font-size:12px;margin-bottom:10px;">Showcase work</div>
+        <div class="placeholder-img" style="height:120px;margin-bottom:10px;"></div>
+        <div class="lbl">Caption</div><div class="wire-box" style="height:40px;margin:4px 0 10px;"></div>
+        <div style="display:flex;gap:6px;margin-bottom:12px;">
+          <div class="pill on">Portfolio feed</div><div class="pill">Community feed</div>
+        </div>
+        <div class="btn solid">Share</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annotations">
+    <ul>
+      <li>Action sheet is the primary engagement driver per the bible — every option maps 1:1 to the nav spec.</li>
+      <li>Showcase Work lets the creative choose which feed(s) it lands in, tying back to the Home feed toggle.</li>
+      <li>Business account sees the same sheet with "Post a gig" as the lead option; Consumer's + is the locked state shown in Stage 2.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ STAGE 5: DMs + PROFILE ============ -->
+<div class="stage-label"><span class="num">05</span><h2>Direct Messages + Profile</h2></div>
+<div class="row">
+
+  <div class="screen-block">
+    <div class="screen-name">DM List</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:14px;">
+        <div style="font-family:var(--mono);font-weight:bold;font-size:12px;margin-bottom:10px;">Messages</div>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
+          <div class="placeholder-img" style="width:34px;height:34px;border-radius:50%;"></div>
+          <div style="flex:1;"><div class="bar-line tiny" style="width:70px;margin-bottom:4px;"></div><div class="bar-line tiny short"></div></div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
+          <div class="placeholder-img" style="width:34px;height:34px;border-radius:50%;"></div>
+          <div style="flex:1;"><div class="bar-line tiny" style="width:70px;margin-bottom:4px;"></div><div class="bar-line tiny short"></div></div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5L12 4.5l8 7V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1V11.5z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span></div>
+        <div class="navitem plusitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span></div>
+        <div class="navitem active"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Conversation</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:12px;justify-content:flex-end;gap:6px;">
+        <div class="wire-box" style="align-self:flex-start;padding:6px 10px;max-width:70%;"><div class="bar-line tiny short"></div></div>
+        <div class="wire-box" style="align-self:flex-end;padding:6px 10px;max-width:70%;background:var(--gray-1);"><div class="bar-line tiny short"></div></div>
+        <div class="wire-box" style="align-self:flex-start;padding:6px 10px;max-width:70%;"><div class="bar-line tiny" style="width:50px;"></div></div>
+        <div class="wire-box" style="height:30px;margin-top:8px;"></div>
+      </div>
+      <div class="bottomnav">
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5L12 4.5l8 7V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1V11.5z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span></div>
+        <div class="navitem plusitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span></div>
+        <div class="navitem active"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Profile — Creative (own), Portfolio tab</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:14px;overflow:hidden;">
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;">
+          <div class="placeholder-img" style="width:52px;height:52px;border-radius:50%;"></div>
+          <div>
+            <div class="bar-line" style="width:90px;margin-bottom:5px;"></div>
+            <div class="lbl">Photographer · Columbus</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:10px;">
+          <div class="pill on">Photo</div><div class="pill on">Styling</div>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:10px;">
+          <div class="wire-box" style="flex:1;text-align:center;padding:5px;"><div class="lbl">Completed</div><div style="font-family:var(--mono);font-size:11px;">12</div></div>
+          <div class="wire-box" style="flex:1;text-align:center;padding:5px;"><div class="lbl">Response</div><div style="font-family:var(--mono);font-size:11px;">96%</div></div>
+        </div>
+        <div class="toptab" style="margin-bottom:8px;"><div class="active">Portfolio</div><div>Saved</div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+          <div class="placeholder-img" style="height:55px;"></div>
+          <div class="placeholder-img" style="height:55px;"></div>
+          <div class="placeholder-img" style="height:55px;"></div>
+          <div class="placeholder-img" style="height:55px;"></div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5L12 4.5l8 7V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1V11.5z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span></div>
+        <div class="navitem plusitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span></div>
+        <div class="navitem active"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Profile — Creative (own), Saved tab</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:14px;overflow:hidden;">
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;">
+          <div class="placeholder-img" style="width:52px;height:52px;border-radius:50%;"></div>
+          <div>
+            <div class="bar-line" style="width:90px;margin-bottom:5px;"></div>
+            <div class="lbl">Photographer · Columbus</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:10px;">
+          <div class="pill on">Photo</div><div class="pill on">Styling</div>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:10px;">
+          <div class="wire-box" style="flex:1;text-align:center;padding:5px;"><div class="lbl">Completed</div><div style="font-family:var(--mono);font-size:11px;">12</div></div>
+          <div class="wire-box" style="flex:1;text-align:center;padding:5px;"><div class="lbl">Response</div><div style="font-family:var(--mono);font-size:11px;">96%</div></div>
+        </div>
+        <div class="toptab" style="margin-bottom:8px;"><div>Portfolio</div><div class="active">Saved</div></div>
+        <div class="lbl" style="margin-bottom:6px;">saved from portfolio + community feeds</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+          <div class="placeholder-img" style="height:55px;"></div>
+          <div class="placeholder-img" style="height:55px;"></div>
+          <div class="placeholder-img" style="height:55px;"></div>
+          <div class="placeholder-img" style="height:55px;"></div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5L12 4.5l8 7V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1V11.5z"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span></div>
+        <div class="navitem plusitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span></div>
+        <div class="navitem active"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Profile — viewed by another user</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="screen" style="padding:14px;overflow:hidden;">
+        <div style="font-family:var(--mono);font-size:14px;margin-bottom:10px;">←</div>
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;">
+          <div class="placeholder-img" style="width:52px;height:52px;border-radius:50%;"></div>
+          <div>
+            <div class="bar-line" style="width:90px;margin-bottom:5px;"></div>
+            <div class="lbl">Videographer · Columbus</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:12px;">
+          <div class="btn solid" style="flex:1;display:flex;align-items:center;justify-content:center;gap:5px;">
+            <span class="navicon" style="width:13px;height:13px;"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="stroke:#fff;stroke-width:2;"><circle cx="9" cy="9" r="3.5"/><path d="M3 19c1-3.2 3.5-5 6-5s5 1.8 6 5"/><line x1="18" y1="8" x2="18" y2="14"/><line x1="15" y1="11" x2="21" y2="11"/></svg></span>
+            Connect
+          </div>
+          <div class="btn" style="flex:1;display:flex;align-items:center;justify-content:center;gap:5px;">
+            <span class="navicon" style="width:13px;height:13px;"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--line);stroke-width:2;"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span>
+            Message
+          </div>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:10px;">
+          <div class="pill on">Video</div><div class="pill on">Music</div>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:10px;">
+          <div class="wire-box" style="flex:1;text-align:center;padding:5px;"><div class="lbl">Completed</div><div style="font-family:var(--mono);font-size:11px;">8</div></div>
+          <div class="wire-box" style="flex:1;text-align:center;padding:5px;"><div class="lbl">Response</div><div style="font-family:var(--mono);font-size:11px;">91%</div></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+          <div class="placeholder-img" style="height:55px;"></div>
+          <div class="placeholder-img" style="height:55px;"></div>
+          <div class="placeholder-img" style="height:55px;"></div>
+          <div class="placeholder-img" style="height:55px;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Profile — Consumer</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="toptab"><div class="active">Profile</div><div>Saved</div></div>
+      <div class="screen" style="padding:14px;overflow:hidden;">
+        <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;">
+          <div class="placeholder-img" style="width:52px;height:52px;border-radius:50%;"></div>
+          <div>
+            <div class="bar-line" style="width:80px;margin-bottom:5px;"></div>
+            <div class="lbl">Columbus</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:14px;">
+          <div class="pill on">Photography</div><div class="pill on">Design</div>
+        </div>
+        <div class="wire-box" style="padding:12px;text-align:center;">
+          <span class="lock-icon">🔒</span>
+          <div style="font-family:var(--mono);font-size:9px;margin-top:6px;">Portfolio, bio &amp; tags</div>
+          <div class="btn solid" style="margin-top:8px;">Upgrade to unlock</div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5L12 4.5l8 7V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1V11.5z"/></svg></span></div>
+        <div class="navitem navitem-locked"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span><span class="lockbadge">🔒</span></div>
+        <div class="navitem plusitem navitem-locked"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span><span class="lockbadge">🔒</span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span></div>
+        <div class="navitem active"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="screen-block">
+    <div class="screen-name">Profile — Consumer, Saved tab</div>
+    <div class="phone">
+      <div class="statusbar"><span>9:41</span><span>●●●</span></div>
+      <div class="toptab"><div>Profile</div><div class="active">Saved</div></div>
+      <div class="screen" style="padding:14px;overflow:hidden;">
+        <div class="lbl" style="margin-bottom:8px;">saved from portfolio + community feeds</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+          <div class="placeholder-img" style="height:65px;"></div>
+          <div class="placeholder-img" style="height:65px;"></div>
+          <div class="placeholder-img" style="height:65px;"></div>
+          <div class="placeholder-img" style="height:65px;"></div>
+        </div>
+      </div>
+      <div class="bottomnav">
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11.5L12 4.5l8 7V19a1 1 0 0 1-1 1h-4.5v-6h-5v6H5a1 1 0 0 1-1-1V11.5z"/></svg></span></div>
+        <div class="navitem navitem-locked"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="6.5"/><line x1="15" y1="15" x2="21" y2="21"/></svg></span><span class="lockbadge">🔒</span></div>
+        <div class="navitem plusitem navitem-locked"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span><span class="lockbadge">🔒</span></div>
+        <div class="navitem"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-4 3v-3H6a2 2 0 0 1-2-2V6z"/></svg></span></div>
+        <div class="navitem active"><span class="navicon"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annotations">
+    <ul>
+      <li>Reputation block shows completed projects + response rate — explicitly no follower or popularity counts, per the bible's reputation principle.</li>
+      <li><span class="flag">▲</span> Portfolio/Saved toggle now lives on Creative and Business profiles too, not just Consumer's — same reasoning: everyone gets a place to revisit what they've bookmarked.</li>
+      <li>Business profile swaps the portfolio grid for a company card + open gigs list; not wired separately — same skeleton, different data, same Saved toggle.</li>
+      <li><span class="flag">▲</span> Consumer profile keeps its own Profile/Saved toggle: Profile shows the light info they set at signup with a locked upsell for portfolio/bio/tags; Saved collects anything they bookmarked from either feed, so there's already a reason to come back before they ever upgrade.</li>
+      <li><span class="flag">▲</span> Viewing someone else's profile now shows Connect + Message as the two lead actions — Connect fires the "wants to connect" request wired into Notifications; own profile never shows this, only other people's.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="stage-label" style="margin-top:80px;"><span class="num">i</span><h2>Notes for next pass</h2></div>
+<div class="row" style="max-width:1400px;">
+  <div class="annotations" style="width:100%;font-size:11px;">
+    <ul>
+      <li>This kit covers structure and flow only — no color, type, or brand styling. Treat it as the skeleton to hand a designer or developer, not a final look.</li>
+      <li>Two open items from the bible are wired as best guesses, flagged in pink above: whether Business accounts are themselves hireable/searchable, and whether Consumer's bottom-nav taps get a hard upgrade wall.</li>
+      <li>Not yet wired: payments/contracts, verified-work badges, and the Cleveland/Cincinnati city switcher — all listed as future features in the bible, not MVP.</li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>

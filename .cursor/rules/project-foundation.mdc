@@ -1,0 +1,47 @@
+---
+description: Huo project foundation and product context
+alwaysApply: true
+---
+
+# Huo — Creative Network (Ohio / Columbus)
+
+Local creative network: portfolios, gigs, collaboration, and hiring — Instagram feed +
+Fiverr marketplace + LinkedIn networking, built for real-world Columbus/Ohio community
+(not clout).
+
+**Read before product, brand, scope, or data-model decisions:**
+
+1. `docs/PRODUCT-BIBLE.md` — authoritative product bible (brand, MVP, pricing, GTM)
+2. `docs/FOUNDATION.md` — condensed working summary
+3. `docs/GOOGLE-STUDIO-UI-PROMPT.md` — UI-only Studio prompt
+
+Prefer the Product Bible when older Google Doc / Milanote notes disagree.
+
+## Quick context
+
+Three account types: Creative (supply), Business (demand), Community/consumer (audience).
+
+Bottom nav: Home · Search · Create (+) · Messages · Profile.
+
+Brand: pink `#FF3C75`, black `#000000`, grey `#888888`; Courier New + Impact (sparse);
+editorial / BTS photography. Reputation over popularity (no follower-count theater).
+
+Pricing (public): Creative Pro $9.99/mo or $99/yr · Business Pro $19.99/mo or $199.99/yr ·
+Founding lock-in $4.99/mo for first 200 · Consumer free.
+
+Launch: Columbus beta → Ohio expansion → city-based national model.
+
+Local Milanote screenshots and wireframes: `Design Reference/`.
+
+Primary repo going forward: https://github.com/Rob-code-94/HUO-APP  
+Legacy foundation-only repo: https://github.com/Rob-code-94/HUO
+
+Protect existing UI under `src/` — consolidate docs/design assets without overwriting app code.
+
+## Reference links
+
+- Milanote: https://app.milanote.com/1WwClh1atNkUec/creative-network
+- Google Doc: https://docs.google.com/document/d/1z4yMjz9fIquliGT0XiXPiNK4cELBv344BUBZAcP317Y/edit?tab=t.0
+
+Both require sign-in. Prefer local assets and `docs/PRODUCT-BIBLE.md`. Write confirmed
+updates back into the Product Bible and Foundation.
