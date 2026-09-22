@@ -14,10 +14,9 @@ The creative network connecting Ohio’s creative community — UI foundation an
 | `/` | Editorial talent-call landing (link-in-bio) |
 | `/app` | Interactive UI kit / wireframes |
 
-## Talent call forms
+## Talent call form
 
-- **Creatives:** [Join the talent call](https://docs.google.com/forms/d/e/1FAIpQLSeNhJLhy8YVlo33JtFDd18HiedTZXLutsomSBKLMN9LHWg86g/viewform?usp=header)
-- **Business / hiring:** [Hiring form](https://docs.google.com/forms/d/e/1FAIpQLSePz9ljzfjOcUJylHiul--ufzkBD0YySXCMgyE3DPtxGxHfdg/viewform?usp=publish-editor)
+In-app multi-step form on `/` (`#talent-call`) using Space Pro **`@shadcn-space/forms-06`**.
 
 ## Workflow (locked)
 

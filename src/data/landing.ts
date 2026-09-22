@@ -1,11 +1,5 @@
 /** Landing page constants — editorial talent call */
 
-export const TALENT_FORM_URL =
-  'https://docs.google.com/forms/d/e/1FAIpQLSeNhJLhy8YVlo33JtFDd18HiedTZXLutsomSBKLMN9LHWg86g/viewform?usp=header';
-
-export const BUSINESS_FORM_URL =
-  'https://docs.google.com/forms/d/e/1FAIpQLSePz9ljzfjOcUJylHiul--ufzkBD0YySXCMgyE3DPtxGxHfdg/viewform?usp=publish-editor';
-
 export const INSTAGRAM_URL = 'https://www.instagram.com/huoapp/';
 
 export const DISCIPLINES = [

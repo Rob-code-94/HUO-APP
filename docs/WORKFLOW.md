@@ -44,12 +44,9 @@ npm run preview  # preview the production build locally
 | `/` | Editorial talent-call landing |
 | `/app` | Interactive wireframe / UI kit |
 
-Forms (external Google Forms):
-
-- Talent: `docs.google.com/forms/...SeNhJLhy8...`
-- Business: `docs.google.com/forms/...SePz9ljz...`
-
-Constants live in `src/data/landing.ts`.
+Talent call uses Space Pro `@shadcn-space/forms-06` on `/#talent-call`
+(`src/components/shadcn-space/blocks/forms-06/`). Landing copy constants:
+`src/data/landing.ts`.
 
 Optional CLI:
 
