@@ -3,8 +3,21 @@
 The creative network connecting Ohio’s creative community — UI foundation and app codebase.
 
 **Repository:** https://github.com/Rob-code-94/HUO-APP  
-**Google AI Studio app:** https://ai.studio/apps/a17ea1b2-e391-4d40-9790-36ecc7066132  
-**Client demo (Vercel):** https://huo-app.vercel.app
+**Landing (Vercel):** https://huo-app.vercel.app  
+**UI kit demo:** https://huo-app.vercel.app/app  
+**Google AI Studio app:** https://ai.studio/apps/a17ea1b2-e391-4d40-9790-36ecc7066132
+
+## Routes
+
+| Path | Purpose |
+| --- | --- |
+| `/` | Editorial talent-call landing (link-in-bio) |
+| `/app` | Interactive UI kit / wireframes |
+
+## Talent call forms
+
+- **Creatives:** [Join the talent call](https://docs.google.com/forms/d/e/1FAIpQLSeNhJLhy8YVlo33JtFDd18HiedTZXLutsomSBKLMN9LHWg86g/viewform?usp=header)
+- **Business / hiring:** [Hiring form](https://docs.google.com/forms/d/e/1FAIpQLSePz9ljzfjOcUJylHiul--ufzkBD0YySXCMgyE3DPtxGxHfdg/viewform?usp=publish-editor)
 
 ## Workflow (locked)
 
@@ -31,11 +44,11 @@ npm run build && npm run preview
 
 | Path | Purpose |
 | --- | --- |
-| `src/` | Interactive UI kit, screens, wireframes (Studio-origin + Cursor fixes) |
+| `src/pages/LandingPage.tsx` | Editorial landing poster |
+| `src/` | Interactive UI kit, screens, wireframes |
 | `docs/PRODUCT-BIBLE.md` | Authoritative product bible |
 | `docs/FOUNDATION.md` | Condensed working summary |
 | `docs/WORKFLOW.md` | Studio → Vercel → Cursor process |
-| `docs/GOOGLE-STUDIO-UI-PROMPT.md` | Prompt used for UI generation |
 | `Design Reference/` | Milanote screenshots, wireframes, brand references |
 
 ## Docs

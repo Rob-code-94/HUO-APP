@@ -32,8 +32,24 @@ npm run preview  # preview the production build locally
 1. Sign up at https://vercel.com with GitHub (`Rob-code-94`).
 2. **Add New Project** → import `Rob-code-94/HUO-APP`.
 3. Framework preset: **Vite** (auto-detected). Build: `npm run build`. Output: `dist`.
-4. Deploy. Live client demo: **https://huo-app.vercel.app**
-5. Send that URL to the client — no AI Studio chrome, no Google Cloud billing.
+4. Deploy. Live URLs:
+   - Landing (link-in-bio): **https://huo-app.vercel.app**
+   - UI kit: **https://huo-app.vercel.app/app**
+5. Send the landing URL to the client — no AI Studio chrome, no Google Cloud billing.
+
+## Landing routes
+
+| Path | Purpose |
+| --- | --- |
+| `/` | Editorial talent-call landing |
+| `/app` | Interactive wireframe / UI kit |
+
+Forms (external Google Forms):
+
+- Talent: `docs.google.com/forms/...SeNhJLhy8...`
+- Business: `docs.google.com/forms/...SePz9ljz...`
+
+Constants live in `src/data/landing.ts`.
 
 Optional CLI:
 
