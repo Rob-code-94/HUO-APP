@@ -1,36 +1,88 @@
+import { useLayoutEffect, useRef } from 'react';
+import { motion, useTransform } from 'motion/react';
+import { useLocation } from 'react-router-dom';
 import OnboardingForm from '@/components/shadcn-space/blocks/forms-06/onboarding-form';
+import { usePosterMotion } from '../hooks/usePosterMotion';
 import { COLLAB_HANDLES, DISCIPLINES, HERO_LINES, INSTAGRAM_URL } from '../data/landing';
 
 const linkRel = 'noopener noreferrer';
 
 export function LandingPage() {
+  const { hash } = useLocation();
+  const posterRef = useRef<HTMLDivElement>(null);
+  const motionLayers = usePosterMotion(posterRef);
+
+  const heroY = useTransform(
+    [motionLayers.hero.y, motionLayers.scrollFade],
+    ([pointerY, scrollY]) => Number(pointerY) + Number(scrollY) * 0.85
+  );
+  const heroOpacity = useTransform(motionLayers.scrollFade, [0, 18], [1, 0.72]);
+
+  useLayoutEffect(() => {
+    if (hash === '#talent-call') {
+      const target = document.getElementById('talent-call');
+      target?.scrollIntoView({ behavior: 'instant', block: 'start' });
+      return;
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [hash]);
+
   return (
     <div className="landing-page">
-      <div className="landing-root">
-        <div className="landing-grain" aria-hidden="true" />
+      <div className="landing-root" ref={posterRef}>
+        <motion.div
+          className="landing-grain"
+          aria-hidden="true"
+          style={{
+            x: motionLayers.grain.x,
+            y: motionLayers.grain.y,
+          }}
+        />
 
         <header className="landing-corners">
-          <div className="landing-brand landing-fade landing-fade-delay-1">
+          <motion.div
+            className="landing-brand landing-fade landing-fade-delay-1"
+            style={{
+              x: motionLayers.brand.x,
+              y: motionLayers.brand.y,
+              rotate: motionLayers.brand.rotate,
+            }}
+          >
             <p className="landing-micro">HUO</p>
             <p className="landing-micro">COLUMBUS, OHIO</p>
             <p className="landing-micro">CREATIVE NETWORK</p>
-          </div>
+          </motion.div>
 
-          <ul className="landing-disciplines landing-fade landing-fade-delay-2">
+          <motion.ul
+            className="landing-disciplines landing-fade landing-fade-delay-2"
+            style={{
+              x: motionLayers.disciplines.x,
+              y: motionLayers.disciplines.y,
+              rotate: motionLayers.disciplines.rotate,
+            }}
+          >
             {DISCIPLINES.map((item) => (
               <li key={item}>{item}</li>
             ))}
-          </ul>
+          </motion.ul>
         </header>
 
         <main className="landing-main">
-          <h1 className="landing-hero landing-fade landing-fade-delay-3">
+          <motion.h1
+            className="landing-hero landing-fade landing-fade-delay-3"
+            style={{
+              x: motionLayers.hero.x,
+              y: motionLayers.prefersReduced ? motionLayers.hero.y : heroY,
+              rotate: motionLayers.hero.rotate,
+              opacity: motionLayers.prefersReduced ? 1 : heroOpacity,
+            }}
+          >
             {HERO_LINES.map((line) => (
               <span key={line} className="landing-hero-line">
                 {line}
               </span>
             ))}
-          </h1>
+          </motion.h1>
         </main>
 
         <footer className="landing-footer landing-fade landing-fade-delay-4">

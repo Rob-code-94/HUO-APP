@@ -1,19 +1,37 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+  ScrollRestoration,
+} from 'react-router-dom';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
 import { LandingPage } from './pages/LandingPage';
 import './index.css';
 
+function LandingRoute() {
+  return (
+    <>
+      <ScrollRestoration
+        getKey={(location) =>
+          location.pathname === '/' && !location.hash ? location.pathname : location.key
+        }
+      />
+      <LandingPage />
+    </>
+  );
+}
+
+const router = createBrowserRouter([
+  { path: '/', element: <LandingRoute /> },
+  { path: '/app', element: <App /> },
+  { path: '/app/*', element: <App /> },
+  { path: '*', element: <Navigate to="/" replace /> },
+]);
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/app" element={<App />} />
-        <Route path="/app/*" element={<App />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </BrowserRouter>
+    <RouterProvider router={router} />
   </StrictMode>
 );
